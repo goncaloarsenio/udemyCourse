@@ -1,6 +1,6 @@
 exports.paginaInicial = (req, res) => {
   res.render("index");
- return;
+  return;
 };
 
 exports.trataPost = (req, res) => {

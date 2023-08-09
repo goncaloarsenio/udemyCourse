@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
@@ -11,7 +11,6 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("conectado à BD");
     app.emit("pronto");
   })
   .catch((e) => console.log(e));
