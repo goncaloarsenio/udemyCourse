@@ -1,22 +1,43 @@
-<!DOCTYPE html>
-<html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modelo</title>
-  </head>
-  <body>
-    <section class="container">
-      <h1>YOOOOO</h1>
-      <form action="/" method="post">
-        <label>Cliente</label>
-        <input type="text" name="cliente">
-        <button>Submit</button>
-      </form>
+<%- include('includes/head') %> <%- include('includes/nav') %>
 
-    </section>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Agenda</h1>
+      <p class="text-center lead">Seus contactos estão abaixo</p>
 
-    <script src="./assets/js/bundle.js"></script>
-  </body>
-</html>
+      <div class="row">
+        <div class="col my-3">
+          <div class="alert alert-danger">Um erro qualquer</div>
+        </div>
+      </div>
+
+      <div class="responsive-table">
+        <table class="table my-3">
+          <tr>
+            <td>Gonçalo</td>
+            <td>Arsénio</td>
+            <td>912341623</td>
+            <td>goncalo@gmail.com</td>
+          </tr>
+          <tr>
+            <td>Gonçalo</td>
+            <td>Arsénio</td>
+            <td>912341623</td>
+            <td>goncalo@gmail.com</td>
+          </tr>
+          <tr>
+            <td>Gonçalo</td>
+            <td>Arsénio</td>
+            <td>912341623</td>
+            <td>goncalo@gmail.com</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
