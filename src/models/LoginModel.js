@@ -22,12 +22,12 @@ class Login {
     this.user = await LoginModel.findOne({ email: this.body.email });
 
     if (!this.user) {
-      this.errors.push("Utilizador não existe");
+      this.errors.push("Usuário não existe.");
       return;
     }
 
     if (!bcryptjs.compareSync(this.body.password, this.user.password)) {
-      this.errors.push("Password inválida");
+      this.errors.push("Senha inválida");
       this.user = null;
       return;
     }
@@ -49,16 +49,18 @@ class Login {
 
   async userExists() {
     this.user = await LoginModel.findOne({ email: this.body.email });
-    if (this.user) this.errors.push("Utilizador já existente");
+    if (this.user) this.errors.push("Usuário já existe.");
   }
 
   valida() {
     this.cleanUp();
-    //validação
-    //email precisa ser valido
+
+    // Validação
+    // O e-mail precisa ser válido
     if (!validator.isEmail(this.body.email))
       this.errors.push("E-mail inválido");
-    //senha tem de ter entre 3 e 18 caracteres
+
+    // A senha precisa ter entre 3 e 50
     if (this.body.password.length < 3 || this.body.password.length > 50) {
       this.errors.push("A senha precisa ter entre 3 e 50 caracteres.");
     }
@@ -70,6 +72,7 @@ class Login {
         this.body[key] = "";
       }
     }
+
     this.body = {
       email: this.body.email,
       password: this.body.password,

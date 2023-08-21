@@ -1,25 +1,26 @@
-const express = require("express");
+const express = require('express');
 const route = express.Router();
 
-const homeController = require("./src/controllers/homeController");
-const loginController = require("./src/controllers/loginController");
-const contactoController = require("./src/controllers/contactoController");
+const homeController = require('./src/controllers/homeController');
+const loginController = require('./src/controllers/loginController');
+const contatoController = require('./src/controllers/contatoController');
 
-const { loginRequired } = require("./src/middlewares/middleware.js");
+const { loginRequired } = require('./src/middlewares/middleware');
 
-//rotas da home
-route.get("/", homeController.index);
+// Rotas da home
+route.get('/', homeController.index);
 
-//rotas de login
-route.get("/login/index", loginController.index);
-route.post("/login/register", loginController.register);
-route.post("/login/login", loginController.login);
-route.get("/login/logout", loginController.logout);
+// Rotas de login
+route.get('/login/index', loginController.index);
+route.post('/login/register', loginController.register);
+route.post('/login/login', loginController.login);
+route.get('/login/logout', loginController.logout);
 
-//Rotas de contacto
-route.get("/contacto/index", loginRequired, contactoController.index);
-route.post("/contacto/register", loginRequired, contactoController.register);
-route.get("/contacto/index/:id", loginRequired, contactoController.editIndex);
-route.post("/contacto/edit/:id", loginRequired, contactoController.edit);
-route.get("/contacto/delete/:id", loginRequired, contactoController.delete);
+// Rotas de contato
+route.get('/contato/index', loginRequired, contatoController.index);
+route.post('/contato/register', loginRequired, contatoController.register);
+route.get('/contato/index/:id', loginRequired, contatoController.editIndex);
+route.post('/contato/edit/:id', loginRequired, contatoController.edit);
+route.get('/contato/delete/:id', loginRequired, contatoController.delete);
+
 module.exports = route;

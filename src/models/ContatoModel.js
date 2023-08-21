@@ -1,29 +1,29 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-const ContactoSchema = new mongoose.Schema({
+const ContatoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
-  apelido: { type: String, required: false, default: "" },
+  sobrenome: { type: String, required: false, default: "" },
   email: { type: String, required: false, default: "" },
   telefone: { type: String, required: false, default: "" },
   criadoEm: { type: Date, default: Date.now },
 });
 
-const ContactoModel = mongoose.model("Contacto", ContactoSchema);
+const ContatoModel = mongoose.model("Contato", ContatoSchema);
 
-function Contacto(body) {
+function Contato(body) {
   this.body = body;
   this.errors = [];
-  this.contacto = null;
+  this.contato = null;
 }
 
-Contacto.prototype.register = async function () {
+Contato.prototype.register = async function () {
   this.valida();
   if (this.errors.length > 0) return;
-  this.contacto = await ContactoModel.create(this.body);
+  this.contato = await ContatoModel.create(this.body);
 };
 
-Contacto.prototype.valida = function () {
+Contato.prototype.valida = function () {
   this.cleanUp();
 
   // Validação
@@ -38,7 +38,7 @@ Contacto.prototype.valida = function () {
   }
 };
 
-Contacto.prototype.cleanUp = function () {
+Contato.prototype.cleanUp = function () {
   for (const key in this.body) {
     if (typeof this.body[key] !== "string") {
       this.body[key] = "";
@@ -47,36 +47,37 @@ Contacto.prototype.cleanUp = function () {
 
   this.body = {
     nome: this.body.nome,
-    apelido: this.body.apelido,
+    sobrenome: this.body.sobrenome,
     email: this.body.email,
     telefone: this.body.telefone,
   };
 };
 
-Contacto.prototype.edit = async function (id) {
+Contato.prototype.edit = async function (id) {
   if (typeof id !== "string") return;
   this.valida();
   if (this.errors.length > 0) return;
-  this.contacto = await ContactoModel.findByIdAndUpdate(id, this.body, {
+  this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, {
     new: true,
   });
 };
 
-//Métodos estáticos
-
-Contacto.buscaPorId = async function (id) {
+// Métodos estáticos
+Contato.buscaPorId = async function (id) {
   if (typeof id !== "string") return;
-  const contacto = await ContactoModel.findById(id);
-  return contacto;
-};
-Contacto.buscaContactos = async function () {
-  const contactos = await ContactoModel.find().sort({ criadoEm: -1 });
-  return contactos;
-};
-Contacto.delete = async function (id) {
-  if (typeof id !== "string") return;
-  const contacto = await ContactoModel.findOneAndDelete({_id: id});
-  return contacto;
+  const contato = await ContatoModel.findById(id);
+  return contato;
 };
 
-module.exports = Contacto;
+Contato.buscaContatos = async function () {
+  const contatos = await ContatoModel.find().sort({ criadoEm: -1 });
+  return contatos;
+};
+
+Contato.delete = async function (id) {
+  if (typeof id !== "string") return;
+  const contato = await ContatoModel.findOneAndDelete({ _id: id });
+  return contato;
+};
+
+module.exports = Contato;
